@@ -11,31 +11,34 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 # Part A: Foundations
 ### Briefly name and describe the three fundamental components of a function.
-# three fundamental components of a function:
-#The formals(), the list of arguments that control how you call the function.
-```{r}
 
+# 1. The formals(), the list of arguments that control how you call the function.
+# 2. The body(), the code inside the function.
 
-#The body(), the code inside the function.
-
-#The environment(), the data structure that determines how the function finds the values associated with the names.
+# 3. The environment(), the data structure that determines how the function finds the values associated with the names.
 
 ### Describe three different ways functions can be stored/applied and an example of when you might want to use each version.
 
-#create a function object (with function) and bind it to a name with <-
+# 1. create a function object (with function) and bind it to a name with <-
+```{r}
 f01 <- function(x) {
   sin(1 / x ^ 2)
 }
+```
+# 2. Anonymous function.
 
-#anonymous function.
+```{r}
 lapply(mtcars, function(x) length(unique(x)))
 Filter(function(x) !is.numeric(x), mtcars)
 integrate(function(x) sin(x) ^ 2, 0, pi)
 
- # put functions in a vector (list):
+```
+
+# 3. Put functions in a vector (list):
+
+```{r}
 funs <- list(
   quarter = function(x) x / 4,
   half = function(x) x / 2,
