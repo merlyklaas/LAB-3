@@ -28,4 +28,10 @@ funs <- list(
   quadruple = function(x) x * 4
 )
 
+mean1 <- function(x) {
+  (sum(x/length(x)))}
+
+  
+mean1(mtcars)
+mtcars
 
