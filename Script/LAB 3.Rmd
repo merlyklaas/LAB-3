@@ -1,6 +1,9 @@
 ---
 title: "LAB 3"
-output: html_document
+author: "Merly Klaas"
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -97,6 +100,7 @@ ZScore <- function(x) {
 
 ZScore(mtcars$mpg)
 ```
+
 # 4. Write a function that takes a data frame as its input and returns a data frame with only the numeric columns.
 
 ```{r}
