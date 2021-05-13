@@ -114,7 +114,7 @@ d <- data.frame(x1 = 1:5,                         # Create example data frame
 Numeric_df(d)
 ```
 
-# 5. Write a function that uses the function you wrote in Question 5, and returns a data frame with the mean and standard deviation of each numeric column. If columns are omitted (because they are non-numeric), print a message stating the specific columns that were not included.
+# 5. Write a function that uses the function you wrote in Question 5, and returns a data frame with the mean and standard deviation of each numeric column. 
 
 ```{r}
 library(dplyr)
@@ -131,4 +131,29 @@ summarize_cols <- function(data, ...) {
 }
 
 summarize_cols(d)
+```
+
+# If columns are omitted (because they are non-numeric), print a message stating the specific columns that were not included.
+
+```{r}
+summarize_cols_1 <- 
+  function(x){
+    all_numeric <- 
+      unlist(lapply(x, is.numeric))
+  
+    if (sum(all_numeric == FALSE) > 0){
+      message(sum(all_numeric == FALSE), 
+              ' non-numeric row(s) removed: ', 
+              names(x[, !all_numeric])
+              )
+      return(Numeric_df(x))
+  } else {
+    Numeric_df(x)
+    }
+  }
+```
+# Example 
+```{r}
+summarize_cols_1(d)
+
 ```
