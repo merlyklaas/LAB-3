@@ -49,15 +49,6 @@ funs <- list(
 # Part B Applied Practice
 ## 1. Write a function to calculate the mean that removes missing data before conducting the calculation. You may not use base::mean or any similar function that conducts a mean calculation. Include a warning in your function if missing data have been removed that prints the total number of cases that were removed.
 
-```{r}
-mean1 <- function(x) {
-  if (is.na(x)){
-    stop("missing data")
-  }
-  (sum(x/length(x)))
-}
-```
-
 
 ```{r}
 mean1 <- function(x) {
@@ -70,6 +61,7 @@ mean1 <- function(x) {
 else{(sum(x/length(x)))}
 }
 ```
+
 # 2. Test your function to make sure it (a) provides the expected results, and (b) gives identical output to base::mean when na.rm = TRUE. Make sure that you test your data against a vector that has missing data.
 
 ```{r}
@@ -109,14 +101,34 @@ ZScore(mtcars$mpg)
 
 ```{r}
 Numeric_df <- function (x){
-  if ()
-  
-}
+nums <- unlist(lapply(x, is.numeric))  
+return(x[, nums])}
+
+# Example
+d <- data.frame(x1 = 1:5,                         # Create example data frame
+                   x2 = LETTERS[1:5],
+                   x3 = 2,
+                   x4 = factor(c(1, 3, 2, 2, 1)),
+                   stringsAsFactors = FALSE)
+
+Numeric_df(d)
 ```
+
 # 5. Write a function that uses the function you wrote in Question 5, and returns a data frame with the mean and standard deviation of each numeric column. If columns are omitted (because they are non-numeric), print a message stating the specific columns that were not included.
 
+```{r}
+library(dplyr)
+library(tidyverse)
 
-
+summarize_cols <- function(data, ...) {
+    Numeric_df(data) %>% 
+        pivot_longer(everything(), 
+                     names_to = "var", 
+                     values_to = "val") %>%
+        group_by(var) %>%
+        summarize(mean = mean(val, na.rm = TRUE),
+                  sd = sd(val, na.rm = TRUE))
 }
-```
 
+summarize_cols(d)
+```
